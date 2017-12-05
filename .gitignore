@@ -1,0 +1,6 @@
+config/parameters.yml
+var/cache/*
+!var/cache/.gitkeep
+var/db/*
+!var/db/.gitkeep
+/vendor/

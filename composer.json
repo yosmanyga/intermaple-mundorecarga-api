@@ -1,0 +1,75 @@
+{
+    "name": "mundorecarga",
+    "description": "",
+    "require": {
+        "php": ">=7.1",
+        "mongodb/mongodb": "~1",
+        "ext-json": "*",
+        "ext-mongodb": "*",
+        "ext-pcre": "*",
+        "ext-gd": "*",
+        "symsonte/framework": "@dev",
+        "yosmy/log": "@dev",
+        "yosmy/upgrade": "@dev",
+        "yosmy/userland-api": "@dev",
+        "yosmy/ding-recharge": "@dev",
+        "yosmy/mongo-aggregate": "@dev",
+        "yosmy/error": "@dev",
+        "alymosul/exponent-server-sdk-php": "^1.0",
+        "dompdf/dompdf": "^0.8",
+        "mustache/mustache": "^2.12"
+    },
+    "require-dev": {
+        "symfony/debug": "~3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Intermaple\\Mundorecarga\\": [
+                "setup",
+                "src/account",
+                "src/api",
+                "src/blacklist/contact",
+                "src/blacklist/log",
+                "src/contact",
+                "src/country",
+                "src/country-photo",
+                "src/metadata",
+                "src/product",
+                "src/promotion",
+                "src/provider",
+                "src/push",
+                "src/topup",
+                "src/upgrade",
+                "src/userland",
+                "test/all",
+                "test/contact",
+                "test/topup",
+                "test/user"
+            ],
+            "Intermaple\\Mundorecarga\\Reseller\\": [
+                "src/reseller/agent",
+                "src/reseller/country",
+                "src/reseller/topup",
+                "src/reseller/transaction",
+                "src/reseller/user"
+            ],
+            "Intermaple\\Mundorecarga\\Scrutiny\\": [
+                "src/scrutiny"
+            ],
+            "Intermaple\\Mundorecarga\\Cli\\": [
+                "src/cli"
+            ],
+            "Intermaple\\Mundorecarga\\Http\\": [
+                "src/http"
+            ]
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://php.yosmy.com"
+        }
+    ],
+    "prefer-stable": true,
+    "minimum-stability": "dev"
+}
