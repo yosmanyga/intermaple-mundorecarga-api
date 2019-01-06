@@ -61,6 +61,14 @@ class Topup extends BSONDocument
     }
 
     /**
+     * @return float
+     */
+    public function getProfit(): float
+    {
+        return $this->offsetGet('profit');
+    }
+
+    /**
      * @return int
      */
     public function getDate(): int

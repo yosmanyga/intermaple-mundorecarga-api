@@ -26,19 +26,21 @@ class CollectTransactionsAsAdmin
      * @http\resolution({method: "POST", path: "/reseller/collect-transactions-as-admin"})
      * @domain\authorization({roles: ["admin"]})
      *
-     * @param int $from
-     * @param int $to
-     * @param int $limit
+     * @param string $user
+     * @param int    $from
+     * @param int    $to
+     * @param int    $limit
      *
      * @return Transactions
      */
     public function collect(
+        ?string $user,
         ?int $from,
         ?int $to,
         ?int $limit
     ) {
         return $this->collectTransactions->collect(
-            null,
+            $user,
             $from,
             $to,
             $limit

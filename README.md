@@ -52,7 +52,12 @@ php bin/app.php /load-promotions
 
 php bin/app.php /populate
 php bin/app.php /add-user +17025173777
-php bin/app.php /add-role +17025173777 admin
-php bin/app.php /add-role +17025173777 operator
-php bin/app.php /add-role +17866237191 admin
-php bin/app.php /add-role +17866237191 operator
+php bin/app.php /add-role US 1 7025173777 admin
+php bin/app.php /add-role US 1 7025173777 operator
+php bin/app.php /add-role US 1 7866237191 admin
+php bin/app.php /add-role US 1 7866237191 operator
+
+## Reseller
+
+php bin/app.php /reseller/register-user US 1 7025173777 Yosmy
+php bin/app.php /reseller/add-country 5b4ebb26053ff CU 0.25

@@ -2,42 +2,35 @@
 
 namespace Intermaple\Mundorecarga\Reseller;
 
-use Yosmy\Userland;
-
 /**
  * @di\service()
  */
 class CollectUsers
 {
     /**
-     * @var Userland\Phone\CollectUsers
+     * @var SelectUserCollection
      */
-    private $collectUsers;
+    private $selectCollection;
 
     /**
-     * @param Userland\Phone\CollectUsers $collectUsers
+     * @param SelectUserCollection $selectCollection
      */
     public function __construct(
-        Userland\Phone\CollectUsers $collectUsers
+        SelectUserCollection $selectCollection
     ) {
-        $this->collectUsers = $collectUsers;
+        $this->selectCollection = $selectCollection;
     }
 
     /**
      * @http\resolution({method: "POST", path: "/reseller/collect-users"})
      * @domain\authorization({roles: ["operator"]})
      *
-     * @param string[] $ids
-     *
      * @return Users
      */
-    public function collect(
-        array $ids
-    ) {
-        $countries = new Users(
-            $this->collectUsers->collect($ids)->getIterator()
-        );
+    public function collect()
+    {
+        $cursor = $this->selectCollection->select()->find();
 
-        return $countries;
+        return new Users($cursor);
     }
 }

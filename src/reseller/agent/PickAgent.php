@@ -7,7 +7,7 @@ use Yosmy\Recharge;
 /**
  * @di\service()
  */
-class AddAgent
+class PickAgent
 {
     /**
      * @var SelectAgentCollection
@@ -24,22 +24,25 @@ class AddAgent
     }
 
     /**
-     * @cli\resolution({command: "/reseller/add-agent"})
-     * @http\resolution({method: "POST", path: "/reseller/add-agent"})
-     * @domain\authorization({roles: ["reseller"]})
-     *
+     * @param string $id
      * @param string $reseller
-     * @param string $name
+     *
+     * @return Agent
      */
-    public function add(
-        string $reseller,
-        string $name
+    public function pick(
+        string $id,
+        string $reseller
     ) {
-        $this->selectCollection->select()->insertOne([
-            '_id' => uniqid(),
+        /** @var Agent $agent */
+        $agent = $this->selectCollection->select()->findOne([
+            '_id' => $id,
             'user' => $reseller,
-            'name' => $name,
-            'deleted' => false
         ]);
+
+        if (!$agent) {
+            throw new \LogicException();
+        }
+
+        return $agent;
     }
 }

@@ -91,6 +91,7 @@ class ComputeTopups
         }
 
         $criteria = [
+            'steps' => Mundorecarga\Topup::STEP_TRANSFER_SUCCESS,
             'contact' => ['$in' => $ids]
         ];
 

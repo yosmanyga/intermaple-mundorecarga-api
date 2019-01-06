@@ -24,6 +24,16 @@ class CheckUserOnContactAdded
     private $banContact;
 
     /**
+     * @param Blacklist\PickUser $pickUser
+     * @param BanContact $banContact
+     */
+    public function __construct(Blacklist\PickUser $pickUser, BanContact $banContact)
+    {
+        $this->pickUser = $pickUser;
+        $this->banContact = $banContact;
+    }
+
+    /**
      * @param Mundorecarga\Contact $contact
      */
     public function ban(

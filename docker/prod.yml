@@ -30,3 +30,7 @@ services:
     restart: always
   imaginary:
     restart: always
+  mongo-express:
+    environment:
+      - ME_CONFIG_OPTIONS_READONLY=true
+    restart: always

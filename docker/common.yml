@@ -28,6 +28,15 @@ services:
     user: "$UID:$GID"
     networks:
       - backend
+  mongo-express:
+    image: mongo-express
+    container_name: mundorecarga_api_mongo_express
+    depends_on:
+      - mongo
+    networks:
+      - backend
+    ports:
+      - 8081:8081
 
 networks:
   frontend:
