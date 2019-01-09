@@ -3,6 +3,7 @@
 namespace Intermaple\Mundorecarga\Reseller;
 
 use Intermaple\Mundorecarga;
+use Intermaple\Mundorecarga\Reseller;
 use MongoDB\BSON\UTCDateTime;
 use Yosmy\Recharge;
 
@@ -37,6 +38,16 @@ class SendTopup
     private $pickProvider;
 
     /**
+     * @var Reseller\User\DecreaseBalance
+     */
+    private $decreaseBalance;
+
+    /**
+     * @var Reseller\User\IncreaseBalance
+     */
+    private $increaseBalance;
+
+    /**
      * @var SelectTopupCollection
      */
     private $selectTopupCollection;
@@ -56,6 +67,8 @@ class SendTopup
      * @param Mundorecarga\PickCountry $pickCountry
      * @param Mundorecarga\PickProduct $pickProduct
      * @param Mundorecarga\PickProvider $pickProvider
+     * @param Reseller\User\DecreaseBalance $decreaseBalance
+     * @param Reseller\User\IncreaseBalance $increaseBalance
      * @param SelectTopupCollection $selectTopupCollection
      * @param Recharge\Ding\SendTransfer $sendTransfer
      */
@@ -66,6 +79,8 @@ class SendTopup
         Mundorecarga\PickProduct $pickProduct,
         Mundorecarga\PickProvider $pickProvider,
         SelectTopupCollection $selectTopupCollection,
+        Reseller\User\DecreaseBalance $decreaseBalance,
+        Reseller\User\IncreaseBalance $increaseBalance,
         Recharge\Ding\SendTransfer $sendTransfer
     ) {
         $this->env = $env;
@@ -73,6 +88,8 @@ class SendTopup
         $this->pickCountry = $pickCountry;
         $this->pickProduct = $pickProduct;
         $this->pickProvider = $pickProvider;
+        $this->decreaseBalance = $decreaseBalance;
+        $this->increaseBalance = $increaseBalance;
         $this->selectTopupCollection = $selectTopupCollection;
         $this->sendTransfer = $sendTransfer;
     }
@@ -87,6 +104,8 @@ class SendTopup
      * @param string $account
      * @param string $product
      * @param float  $amount
+     *
+     * @throws PaymentException
      */
     public function send(
         $reseller,
@@ -119,14 +138,24 @@ class SendTopup
             throw new \LogicException(null, null, $e);
         }
 
+        try {
+            $this->decreaseBalance->decrease(
+                $reseller,
+                $amount
+            );
+        } catch (User\InsufficientBalanceException $e) {
+            throw new PaymentException();
+        }
+
         $id = uniqid();
 
         $this->selectTopupCollection->select()->insertOne([
             '_id' => $id,
             'agent' => $agent->getId(),
-            'ding' => null,
+            'account' => $account,
             'product' => $product->getId(),
             'amount' => $amount,
+            'ding' => null,
             'attempts' => 0,
             'profit' => null,
             'date' => new UTCDateTime(time() * 1000),
@@ -135,28 +164,35 @@ class SendTopup
 
         /* Transfer */
 
-        $this->sendTransfer(
-            $id,
-            $country->getPrefix(),
-            $account,
-            $amount,
-            $product->getId()
-        );
+        try {
+            $this->sendTransfer(
+                $id,
+                $country->getPrefix(),
+                $account,
+                $product->getId(),
+                $amount
+            );
+        } catch (\Exception $e) {
+            $this->increaseBalance->increase(
+                $reseller,
+                $amount
+            );
+        }
     }
 
     /**
      * @param string  $id
      * @param string  $prefix
      * @param string  $account
-     * @param int     $amount
      * @param string  $product
+     * @param float   $amount
      */
     private function sendTransfer(
         $id,
         $prefix,
         $account,
-        $amount,
-        string $product
+        string $product,
+        float $amount
     ) {
         if ($this->env == 'dev') {
             return;

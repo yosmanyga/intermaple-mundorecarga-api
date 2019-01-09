@@ -7,7 +7,7 @@ use Yosmy\Userland;
 /**
  * @di\service()
  */
-class PickUser
+class PickUserAsOperator
 {
     /**
      * @var Userland\Phone\PickUser
@@ -24,7 +24,7 @@ class PickUser
     }
 
     /**
-     * @http\resolution({method: "POST", path: "/userland/phone/pick-user"})
+     * @http\resolution({method: "POST", path: "/userland/phone/pick-user-as-operator"})
      * @domain\authorization({roles: ["operator"]})
      *
      * @param string $id

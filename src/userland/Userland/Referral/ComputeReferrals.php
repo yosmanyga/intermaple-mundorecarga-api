@@ -130,6 +130,47 @@ class ComputeReferrals
                 ]
             );
 
+        $response = iterator_to_array($response);
+
+        if (!$response) {
+            switch ($group) {
+                case self::GROUP_BY_DAY:
+                    $id = [
+                        'year' => date('Y', $from),
+                        'month' => date('n', $from),
+                        'day' => date('j', $from),
+                    ];
+
+                    break;
+                case self::GROUP_BY_MONTH:
+                    $id = [
+                        'year' => date('Y', $from),
+                        'month' => date('n', $from),
+                    ];
+
+                    break;
+                case self::GROUP_BY_YEAR:
+                    $id = [
+                        'year' => date('Y', $from),
+                    ];
+
+                    break;
+                default:
+                    $id = [
+                        'year' => date('Y', $from),
+                        'month' => date('m', $from),
+                        'day' => date('j', $from),
+                    ];
+            }
+
+            $response = [
+                [
+                    '_id' => $id,
+                    'referrals' => 0,
+                ]
+            ];
+        }
+
         return $this->prepareAggregation->prepare(
             $from,
             $to,

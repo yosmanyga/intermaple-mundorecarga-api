@@ -2,6 +2,7 @@
 
 namespace Intermaple\Mundorecarga\Reseller;
 
+use Intermaple\Mundorecarga\Reseller\User\Provider;
 use MongoDB\Model\BSONDocument;
 
 class User extends BSONDocument
@@ -31,6 +32,14 @@ class User extends BSONDocument
     }
 
     /**
+     * @return array
+     */
+    public function getProviders(): array
+    {
+        return $this->offsetGet('providers');
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function bsonUnserialize(array $data)
@@ -38,6 +47,15 @@ class User extends BSONDocument
         $data['id'] = $data['_id'];
         unset($data['_id']);
 
+        $providers = [];
+        foreach ($data['providers'] as $provider) {
+            $providers[] = new Provider(
+                $provider->id,
+                $provider->discount
+            );
+        }
+        $data['providers'] = $providers;
+        
         parent::bsonUnserialize($data);
     }
 }

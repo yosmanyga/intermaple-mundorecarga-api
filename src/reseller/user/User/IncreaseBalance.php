@@ -16,34 +16,21 @@ class IncreaseBalance
     private $selectUserCollection;
 
     /**
-     * @var Reseller\SelectTransactionCollection
-     */
-    private $selectTransactionCollection;
-
-    /**
-     * @param Reseller\SelectUserCollection        $selectUserCollection
-     * @param Reseller\SelectTransactionCollection $selectTransactionCollection
+     * @param Reseller\SelectUserCollection $selectUserCollection
      */
     public function __construct(
-        Reseller\SelectUserCollection $selectUserCollection,
-        Reseller\SelectTransactionCollection $selectTransactionCollection
+        Reseller\SelectUserCollection $selectUserCollection
     ) {
         $this->selectUserCollection = $selectUserCollection;
-        $this->selectTransactionCollection = $selectTransactionCollection;
     }
 
     /**
-     * @http\resolution({method: "POST", path: "/reseller/user/increase-balance"})
-     * @domain\authorization({roles: ["admin"]})
-     *
      * @param string $user
      * @param float  $amount
-     * @param string $reference
      */
     public function increase(
         string $user,
-        float $amount,
-        string $reference
+        float $amount
     ) {
         $this->selectUserCollection->select()->updateOne(
             [
@@ -55,13 +42,5 @@ class IncreaseBalance
                 ]
             ]
         );
-
-        $this->selectTransactionCollection->select()->insertOne([
-            '_id' => uniqid(),
-            'user' => $user,
-            'amount' => $amount,
-            'reference' => $reference,
-            'date' => new UTCDateTime(time() * 1000),
-        ]);
     }
 }

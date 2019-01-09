@@ -150,6 +150,7 @@ class SendTopup
      * @param string $client
      * @param string $country
      * @param string $account
+     * @param string $type
      * @param string $product
      * @param float  $amount
      * @param string $card
@@ -163,6 +164,7 @@ class SendTopup
         $client,
         $country,
         $account,
+        $type,
         $product,
         $amount,
         $card
@@ -204,6 +206,7 @@ class SendTopup
             $client,
             $country,
             $account,
+            $type,
             $provider
         );
 
@@ -243,15 +246,20 @@ class SendTopup
                 $client,
                 $card,
                 $charge,
+                $type === "phone"
+                    ? sprintf(
+                        '$%s al +%s-%s',
+                        $amount,
+                        $country->getPrefix(),
+                        $account
+                    )
+                    : sprintf(
+                    '$%s al %s',
+                        $amount,
+                        $account
+                    ),
                 sprintf(
-                    '$%s al +%s-%s',
-                    $amount,
-                    $country->getPrefix(),
-                    $account
-                ),
-                sprintf(
-                    'Recarga +%s-%s',
-                    $country->getPrefix(),
+                    'Recarga %s',
                     $contact->getName() != ""
                         ? sprintf('%s (%s)', $account, $contact->getName())
                         : $account
@@ -269,7 +277,7 @@ class SendTopup
                     '$push' => ['steps' => Topup::STEP_PAYMENT]
                 ]
             );
-        } catch (Userland\Stripe\Exception $e) {
+        } catch (Userland\Stripe\Card\Exception $e) {
             $this->selectTopupCollection->select()->deleteOne(
                 ['_id' => $id]
             );
@@ -294,8 +302,8 @@ class SendTopup
         $this->sendTransfer(
             $id,
             $contact,
-            $amount,
-            $product->getId()
+            $product->getId(),
+            $amount
         );
 
         return $contact->getId();
@@ -325,8 +333,8 @@ class SendTopup
             $this->sendTransfer(
                 $id,
                 $contact,
-                $topup->getAmount(),
-                $topup->getProduct()
+                $topup->getProduct(),
+                $topup->getAmount()
             );
         } catch (\Exception $e) {
             // Ignore exception
@@ -371,8 +379,8 @@ class SendTopup
             $this->sendTransfer(
                 $id,
                 $contact,
-                $topup->getAmount(),
-                $topup->getProduct()
+                $topup->getProduct(),
+                $topup->getAmount()
             );
         } catch (\Exception $e) {
             // Ignore exception
@@ -393,14 +401,14 @@ class SendTopup
     /**
      * @param string  $id
      * @param Contact $contact
-     * @param int     $amount
      * @param string  $product
+     * @param float   $amount
      */
     private function sendTransfer(
         $id,
         Contact $contact,
-        $amount,
-        string $product
+        string $product,
+        float $amount
     ) {
         if ($this->env == 'dev') {
             return;

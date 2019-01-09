@@ -13,19 +13,27 @@ class CollectTopupsAsClient
     private $pickContact;
 
     /**
+     * @var CollectContactsAsClient
+     */
+    private $collectContacts;
+
+    /**
      * @var CollectTopups
      */
     private $collectTopups;
 
     /**
-     * @param PickContact   $pickContact
-     * @param CollectTopups $collectTopups
+     * @param PickContact             $pickContact
+     * @param CollectContactsAsClient $collectContacts
+     * @param CollectTopups           $collectTopups
      */
     public function __construct(
         PickContact $pickContact,
+        CollectContactsAsClient $collectContacts,
         CollectTopups $collectTopups
     ) {
         $this->pickContact = $pickContact;
+        $this->collectContacts = $collectContacts;
         $this->collectTopups = $collectTopups;
     }
 
@@ -39,13 +47,22 @@ class CollectTopupsAsClient
      * @return TopupAsClient[]
      */
     public function collect(
-        $client,
-        $contact
+        string $client,
+        ?string $contact
     ) {
-        $contact = $this->pickContact->pick($contact, $client);
+        if ($contact !== null) {
+            $contact = $this->pickContact->pick($contact, $client);
+
+            $contacts = [$contact->getId()];
+        } else {
+            $contacts = [];
+            foreach ($this->collectContacts->collect($client) as $contact) {
+                $contacts[] = $contact->getId();
+            }
+        }
 
         $topups = $this->collectTopups->collect(
-            [$contact->getId()],
+            $contacts,
             null,
             null,
             null,

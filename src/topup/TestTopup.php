@@ -4,6 +4,7 @@ namespace Intermaple\Mundorecarga;
 
 use Yosmy\Recharge;
 use Yosmy\Log;
+use Yosmy\ReportError;
 
 /**
  * @di\service()
@@ -26,18 +27,26 @@ class TestTopup
     private $addEvent;
 
     /**
+     * @var ReportError
+     */
+    private $reportError;
+
+    /**
      * @param PickProvider               $pickProvider
      * @param Recharge\Ding\SendTransfer $sendTransfer
      * @param Log\AddEvent               $addEvent
+     * @param ReportError                $reportError
      */
     public function __construct(
         PickProvider $pickProvider,
         Recharge\Ding\SendTransfer $sendTransfer,
-        Log\AddEvent $addEvent
+        Log\AddEvent $addEvent,
+        ReportError $reportError
     ) {
         $this->pickProvider = $pickProvider;
         $this->sendTransfer = $sendTransfer;
         $this->addEvent = $addEvent;
+        $this->reportError = $reportError;
     }
 
     /**
@@ -74,8 +83,12 @@ class TestTopup
                 $firstProduct->getMin()->getAmount()
             );
         } catch (Recharge\Ding\AccountException $e) {
+            $this->reportError->report($e);
+
             throw new Topup\AccountException();
         } catch (Recharge\Ding\ProviderException $e) {
+            $this->reportError->report($e);
+
             throw new Topup\ProviderException();
         }
     }

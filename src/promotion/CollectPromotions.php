@@ -28,13 +28,26 @@ class CollectPromotions
      * @param array $providers
      * @param int   $start
      *
-     * @return Promotions
+     * @return Promotion[]
      */
     public function collect($providers, $start)
     {
-        $promotions = new Promotions(
-            $this->collectPromotions->collect($providers, $start)->getIterator()
-        );
+        /** @var Recharge\Ding\Promotion[] $cursor */
+        $cursor = $this->collectPromotions->collect($providers, $start);
+
+        $promotions = [];
+        foreach ($cursor as $promotion) {
+            $headline = str_replace(['Ezetop', 'ezetop', 'Ding', 'ding'], 'MundoRecarga', $promotion['headline']);
+            $terms = str_replace(['Ezetop', 'ezetop', 'Ding', 'ding'], 'MundoRecarga', $promotion['terms']);
+
+            $promotions[] = new Promotion(array_merge(
+                $promotion->getArrayCopy(),
+                [
+                    'headline' => $headline,
+                    'terms' => $terms,
+                ]
+            ));
+        }
 
         return $promotions;
     }

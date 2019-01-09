@@ -64,8 +64,9 @@ class RegisterUser
 
         $this->selectUserCollection->select()->insertOne([
             '_id' => $id,
+            'name' => $name,
             'balance' => 0,
-            'name' => $name
+            'providers' => []
         ]);
         
         $this->addAgent->add($id, $name);

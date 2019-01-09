@@ -33,7 +33,7 @@ class AddUser
         $this->selectUserCollection->select()->insertOne([
             '_id' => $client,
             'code' => $this->generateCode(),
-            'balance' => 10, // Initial promo
+            'balance' => 0,
             'referrals' => []
         ]);
     }

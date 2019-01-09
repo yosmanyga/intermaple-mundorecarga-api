@@ -24,15 +24,19 @@ class CollectProviders
 
     /**
      * @http\resolution({method: "POST", path: "/collect-providers"})
+     * @cache({"expiry": "1 month"})
      *
-     * @param string|null $country
+     * @param string[] $ids
+     * @param string   $country
      *
      * @return Providers
      */
-    public function collect($country = null)
-    {
+    public function collect(
+        $ids,
+        $country
+    ) {
         $providers = new Providers(
-            $this->collectProviders->collect(null, $country)->getIterator()
+            $this->collectProviders->collect($ids, $country)->getIterator()
         );
 
         return $providers;

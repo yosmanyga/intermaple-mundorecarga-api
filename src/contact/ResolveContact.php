@@ -43,6 +43,7 @@ class ResolveContact
      * @param string   $client
      * @param Country  $country
      * @param string   $account
+     * @param string   $type
      * @param Provider $provider
      *
      * @return Contact
@@ -51,6 +52,7 @@ class ResolveContact
         string $client,
         Country $country,
         string $account,
+        string $type,
         Provider $provider
     ) {
         try {
@@ -69,6 +71,7 @@ class ResolveContact
                 $client,
                 $country,
                 $account,
+                $type,
                 $provider
             );
         }

@@ -35,6 +35,10 @@ class CollectAgents
         $cursor = $this->selectCollection->select()->find([
             'user' => $reseller,
             'deleted' => false
+        ], [
+            'sort' => [
+                'name' => 1
+            ],
         ]);
 
         return new Agents($cursor);

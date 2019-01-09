@@ -24,6 +24,7 @@ class CollectCountries
 
     /**
      * @http\resolution({method: "POST", path: "/collect-countries"})
+     * @cache({"expiry": "1 month"})
      *
      * @param string[] $isos
      *

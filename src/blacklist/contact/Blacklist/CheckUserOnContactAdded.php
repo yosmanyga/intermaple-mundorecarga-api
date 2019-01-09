@@ -43,7 +43,13 @@ class CheckUserOnContactAdded
             // Is banned?
             $this->pickUser->pick($contact->getUser());
 
-            $this->banContact->ban($contact, ['type' => 'user', 'value' => $contact->getUser()]);
+            $this->banContact->ban(
+                $contact,
+                [
+                    'type' => 'user-banned',
+                    'value' => $contact->getUser()
+                ]
+            );
         } catch (Blacklist\NonexistentUserException $e) {
         }
     }

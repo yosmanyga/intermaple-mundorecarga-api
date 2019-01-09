@@ -24,6 +24,7 @@ class PickCountry
 
     /**
      * @http\resolution({method: "POST", path: "/pick-country"})
+     * @cache({"expiry": "1 hour"})
      *
      * @param string $iso
      *

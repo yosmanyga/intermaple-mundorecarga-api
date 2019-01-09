@@ -27,13 +27,11 @@ class Topup extends BSONDocument
     }
 
     /**
-     * Ding topup id
-     *
      * @return string
      */
-    public function getDing(): string
+    public function getAccount(): string
     {
-        return $this->offsetGet('ding');
+        return $this->offsetGet('account');
     }
 
     /**
@@ -50,6 +48,16 @@ class Topup extends BSONDocument
     public function getAmount(): float
     {
         return $this->offsetGet('amount');
+    }
+
+    /**
+     * Ding topup id
+     *
+     * @return string
+     */
+    public function getDing(): string
+    {
+        return $this->offsetGet('ding');
     }
 
     /**

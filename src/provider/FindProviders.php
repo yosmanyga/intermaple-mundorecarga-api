@@ -28,13 +28,24 @@ class FindProviders
      * @param string $country
      * @param string $prefix
      * @param string $account
-     * 
+     * @param string $type
+     *
      * @return Providers
      */
-    public function find($country, $prefix, $account)
+    public function find($country, $prefix, $account, $type)
     {
+        $exclude = [];
+
+        if ($type == "phone" && $prefix == '53') {
+            $exclude = [
+                '3CCU',
+                'CBCU',
+                'CACU'
+            ];
+        }
+        
         $providers = new Providers(
-            $this->findProviders->find($country, $prefix, $account)->getIterator()
+            $this->findProviders->find($country, $prefix, $account, $type, $exclude)->getIterator()
         );
 
         return $providers;

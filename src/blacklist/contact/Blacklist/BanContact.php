@@ -35,8 +35,8 @@ class BanContact
      * })
      *
      * @param SelectContactCollection $selectCollection
-     * @param Log\AddEvent         $addEvent
-     * @param callable[] $listeners
+     * @param Log\AddEvent            $addEvent
+     * @param callable[]              $listeners
      */
     public function __construct(
         SelectContactCollection $selectCollection,
@@ -86,7 +86,7 @@ class BanContact
 
         foreach ($this->listeners as $listener) {
             $listener(
-                $contact
+                $contact->getId()
             );
         }
     }

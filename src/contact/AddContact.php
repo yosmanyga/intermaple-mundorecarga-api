@@ -39,6 +39,7 @@ class AddContact
      * @param string   $user
      * @param Country  $country
      * @param string   $account
+     * @param string   $type
      * @param Provider $provider
      *
      * @return Contact
@@ -47,6 +48,7 @@ class AddContact
         string $user,
         Country $country,
         string $account,
+        string $type,
         Provider $provider
     ) {
         $id = uniqid();
@@ -57,6 +59,7 @@ class AddContact
             'country' => $country->getIso(),
             'prefix' => $country->getPrefix(),
             'account' => $account,
+            'type' => $type,
             'provider' => $provider->getId(),
             'name' => '',
             'deleted' => false

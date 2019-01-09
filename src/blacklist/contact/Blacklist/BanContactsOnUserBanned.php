@@ -43,7 +43,13 @@ class BanContactsOnUserBanned
         $contacts = $this->collectContacts->collect(null, [$user], null);
 
         foreach ($contacts as $contact) {
-            $this->banContact->ban($contact, ['type' => 'user', 'value' => $user]);
+            $this->banContact->ban(
+                $contact,
+                [
+                    'type' => 'user-banned',
+                    'value' => $user
+                ]
+            );
         }
     }
 

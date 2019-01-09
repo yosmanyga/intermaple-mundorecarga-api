@@ -143,7 +143,9 @@ class GenerateReceipt
         $to = [
             'country' => $country,
             'provider' => $provider->getName(),
-            'number' => sprintf('+%s-%s', $contact->getPrefix(), $contact->getAccount())
+            'number' => $contact->getType() == "phone"
+                ? sprintf('+%s-%s', $contact->getPrefix(), $contact->getAccount())
+                : $contact->getAccount()
         ];
 
         $charge = $this->retrieveCharge->retrieve($topup->getStripe());

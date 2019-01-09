@@ -27,16 +27,32 @@ class DetectProviders
      *
      * @param string $prefix
      * @param string $account
-     * 
+     * @param string $type
+     *
      * @return Providers
      *
      * @throws InvalidAccountException
      */
-    public function detect($prefix, $account)
+    public function detect($prefix, $account, $type)
     {
+        $exclude = [];
+
+        if ($type == "phone" && $prefix == '53') {
+            $exclude = [
+                '3CCU',
+                'CBCU',
+                'CACU'
+            ];
+        }
+
         try {
             $providers = new Providers(
-                $this->detectProviders->detect($prefix, $account)->getIterator()
+                $this->detectProviders->detect(
+                    $prefix,
+                    $account,
+                    $type,
+                    $exclude
+                )->getIterator()
             );
         } catch (Recharge\Ding\AccountException $e) {
             throw new InvalidAccountException();

@@ -53,9 +53,13 @@ class CommandCaller implements BaseCommandCaller
                     'payload' => $payload
                 ];
             } else {
+                $this->reportError->report($e);
+
                 throw $e;
             }
         } catch (\Throwable $e) {
+            $this->reportError->report($e);
+
             throw $e;
         }
 

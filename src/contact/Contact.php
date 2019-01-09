@@ -49,6 +49,14 @@ class Contact extends BSONDocument
     /**
      * @return string
      */
+    public function getType()
+    {
+        return $this->offsetGet('type');
+    }
+
+    /**
+     * @return string
+     */
     public function getProvider(): string
     {
         return $this->offsetGet('provider');

@@ -24,20 +24,12 @@ class CollectMetadatas
     /**
      * @http\resolution({method: "POST", path: "/collect-metadatas"})
      *
-     * @param string[] $ids
-     *
      * @return Metadatas
      */
-    public function collect($ids)
+    public function collect()
     {
-        $criteria = [];
-
-        if ($ids) {
-            $criteria['_id'] = ['$in' => $ids];
-        }
-
         $cursor = $this->selectMetadataCollection->select()->find(
-            $criteria,
+            [],
             [
                 'sort' => [
                     'description' => 1

@@ -25,12 +25,13 @@ class CollectProducts
     /**
      * @http\resolution({method: "POST", path: "/collect-products"})
      *
-     * @param string|null $provider
+     * @param string $provider
      *
      * @return Products
      */
-    public function collect($provider = null)
-    {
+    public function collect(
+        ?string $provider
+    ) {
         $products = new Products(
             $this->collectProducts->collect($provider)->getIterator()
         );

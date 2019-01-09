@@ -30,7 +30,16 @@ services:
     restart: always
   imaginary:
     restart: always
-  mongo-express:
-    environment:
-      - ME_CONFIG_OPTIONS_READONLY=true
-    restart: always
+#  mongo-express:
+#    image: mongo-express
+#    container_name: mundorecarga_api_mongo_express
+#    depends_on:
+#      - mongo
+#    networks:
+#      - frontend
+#      - backend
+#    environment:
+#      - ME_CONFIG_OPTIONS_READONLY=true
+#      - ME_CONFIG_SITE_BASEURL=/db/
+#    expose:
+#      - 8081

@@ -52,4 +52,22 @@ class CollectContacts
 
         return new Contacts($cursor);
     }
+
+    /**
+     * @param string $prefix
+     * @param string $account
+     *
+     * @return Contacts
+     */
+    public function collectByNumber(
+        string $prefix,
+        string $account
+    ) {
+        $cursor = $this->selectCollection->select()->find([
+            'prefix' => $prefix,
+            'account' => $account,
+        ]);
+
+        return new Contacts($cursor);
+    }
 }

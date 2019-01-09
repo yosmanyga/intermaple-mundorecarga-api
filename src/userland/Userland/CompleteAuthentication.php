@@ -110,6 +110,7 @@ class CompleteAuthentication
             $authentication->getId(),
             $authentication->getSession(),
             $authentication->getToken(),
+            $authentication->getPhone(),
             $authentication->getRoles()
         );
     }

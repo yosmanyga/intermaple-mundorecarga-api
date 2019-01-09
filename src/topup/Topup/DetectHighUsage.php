@@ -83,6 +83,6 @@ class DetectHighUsage
 
         $response = iterator_to_array($response);
 
-        return $response && $response[0]['amount'] >= 20;
+        return $response && $response[0]['amount'] >= 21;
     }
 }
