@@ -13,6 +13,7 @@
         "yosmy/log": "@dev",
         "yosmy/upgrade": "@dev",
         "yosmy/userland-api": "@dev",
+        "yosmy/userland-password": "@dev",
         "yosmy/ding-recharge": "@dev",
         "yosmy/mongo-aggregate": "@dev",
         "yosmy/error": "@dev",
@@ -51,6 +52,7 @@
             ],
             "Intermaple\\Mundorecarga\\Reseller\\": [
                 "src/reseller/agent",
+                "src/reseller/provider",
                 "src/reseller/topup",
                 "src/reseller/transaction",
                 "src/reseller/user"

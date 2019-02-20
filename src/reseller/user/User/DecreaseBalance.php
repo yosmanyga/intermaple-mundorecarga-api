@@ -3,7 +3,6 @@
 namespace Intermaple\Mundorecarga\Reseller\User;
 
 use Intermaple\Mundorecarga\Reseller;
-use MongoDB\BSON\UTCDateTime;
 use MongoDB\UpdateResult;
 
 /**
@@ -40,9 +39,9 @@ class DecreaseBalance
             '_id' => $user
         ]);
 
-        if ($user->getBalance() < $amount) {
-            throw new InsufficientBalanceException();
-        }
+//        if ($user->getBalance() < $amount) {
+//            throw new InsufficientBalanceException();
+//        }
 
         /** @var UpdateResult $update */
         $update = $this->selectUserCollection->select()->updateOne(

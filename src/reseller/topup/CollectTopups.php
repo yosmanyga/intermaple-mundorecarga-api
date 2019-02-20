@@ -3,7 +3,6 @@
 namespace Intermaple\Mundorecarga\Reseller;
 
 use MongoDB\BSON\UTCDateTime;
-use Yosmy\Userland;
 
 /**
  * @di\service()
@@ -34,7 +33,7 @@ class CollectTopups
     public function collect(
         int $from,
         int $to,
-        array $agents
+        ?array $agents
     ) {
         $criteria = $this->buildCriteria($from, $to, $agents);
 
@@ -64,7 +63,7 @@ class CollectTopups
     private function buildCriteria(
         int $from,
         int $to,
-        array $agents
+        ?array $agents
     ) {
         $criteria = [];
 

@@ -23,6 +23,7 @@ class PickPhoto
 
     /**
      * @http\resolution({method: "POST", path: "/country/pick-photo"})
+     * @cache({"expiry": "1 day"})
      *
      * @param string $country
      *

@@ -33,7 +33,7 @@ class SendTopup
     private $pickProduct;
 
     /**
-     * @var Mundorecarga\PickProvider
+     * @var Mundorecarga\Reseller\PickProvider
      */
     private $pickProvider;
 
@@ -66,7 +66,7 @@ class SendTopup
      * @param PickAgent $pickAgent
      * @param Mundorecarga\PickCountry $pickCountry
      * @param Mundorecarga\PickProduct $pickProduct
-     * @param Mundorecarga\PickProvider $pickProvider
+     * @param Mundorecarga\Reseller\PickProvider $pickProvider
      * @param Reseller\User\DecreaseBalance $decreaseBalance
      * @param Reseller\User\IncreaseBalance $increaseBalance
      * @param SelectTopupCollection $selectTopupCollection
@@ -77,7 +77,7 @@ class SendTopup
         PickAgent $pickAgent,
         Mundorecarga\PickCountry $pickCountry,
         Mundorecarga\PickProduct $pickProduct,
-        Mundorecarga\PickProvider $pickProvider,
+        Mundorecarga\Reseller\PickProvider $pickProvider,
         SelectTopupCollection $selectTopupCollection,
         Reseller\User\DecreaseBalance $decreaseBalance,
         Reseller\User\IncreaseBalance $increaseBalance,
@@ -105,7 +105,8 @@ class SendTopup
      * @param string $product
      * @param float  $amount
      *
-     * @throws PaymentException
+     * @throws Topup\PaymentException
+     * @throws Topup\ProviderException
      */
     public function send(
         $reseller,
@@ -132,19 +133,19 @@ class SendTopup
             throw new \LogicException(null, null, $e);
         }
 
-        try {
-            $this->pickProvider->pick($product->getProvider());
-        } catch (Mundorecarga\NonexistentProviderException $e) {
-            throw new \LogicException(null, null, $e);
-        }
+        $provider = $this->pickProvider->pick($product->getProvider());
+
+        $discount = $amount * $provider->getDiscount() / 100;
+
+        $charge = $amount - $discount;
 
         try {
             $this->decreaseBalance->decrease(
                 $reseller,
-                $amount
+                $charge
             );
         } catch (User\InsufficientBalanceException $e) {
-            throw new PaymentException();
+            throw new Topup\PaymentException();
         }
 
         $id = uniqid();
@@ -157,7 +158,9 @@ class SendTopup
             'amount' => $amount,
             'ding' => null,
             'attempts' => 0,
-            'profit' => null,
+            'charge' => $charge,
+            'receive' => null,
+            'currency' => null,
             'date' => new UTCDateTime(time() * 1000),
             'steps' => []
         ]);
@@ -175,8 +178,14 @@ class SendTopup
         } catch (\Exception $e) {
             $this->increaseBalance->increase(
                 $reseller,
-                $amount
+                $charge
             );
+
+            $this->selectTopupCollection->select()->deleteOne([
+                '_id' => $id
+            ]);
+
+            throw new Topup\ProviderException();
         }
     }
 
@@ -219,7 +228,8 @@ class SendTopup
                 [
                     '$set' => [
                         'ding' => $receipt->getId(),
-                        'profit' => $receipt->getCommission(),
+                        'receive' => $receipt->getReceive(),
+                        'currency' => $receipt->getCurrency(),
                     ],
                     '$push' => ['steps' => Topup::STEP_TRANSFER_SUCCESS]
                 ]

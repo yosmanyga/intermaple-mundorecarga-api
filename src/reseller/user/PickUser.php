@@ -22,9 +22,6 @@ class PickUser
     }
 
     /**
-     * @http\resolution({method: "POST", path: "/reseller/pick-user"})
-     * @domain\authorization({roles: ["reseller"]})
-     *
      * @param string $reseller
      *
      * @return User

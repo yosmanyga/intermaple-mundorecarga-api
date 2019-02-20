@@ -22,24 +22,29 @@ class CollectAgents
     }
 
     /**
-     * @http\resolution({method: "POST", path: "/reseller/collect-agents"})
-     * @domain\authorization({roles: ["reseller"]})
-     *
-     * @param string $reseller
+     * @param string $user
      *
      * @return Agents
      */
     public function collect(
-        string $reseller
+        ?string $user
     ) {
-        $cursor = $this->selectCollection->select()->find([
-            'user' => $reseller,
+        $criteria = [
             'deleted' => false
-        ], [
-            'sort' => [
-                'name' => 1
-            ],
-        ]);
+        ];
+
+        if ($user) {
+            $criteria['user'] = $user;
+        }
+
+        $cursor = $this->selectCollection->select()->find(
+            $criteria,
+            [
+                'sort' => [
+                    'name' => 1
+                ],
+            ]
+        );
 
         return new Agents($cursor);
     }

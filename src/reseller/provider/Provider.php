@@ -4,7 +4,7 @@ namespace Intermaple\Mundorecarga\Reseller;
 
 use MongoDB\Model\BSONDocument;
 
-class User extends BSONDocument
+class Provider extends BSONDocument
 {
     /**
      * @return string
@@ -17,17 +17,25 @@ class User extends BSONDocument
     /**
      * @return string
      */
-    public function getName(): string
+    public function getPid(): string
     {
-        return $this->offsetGet('name');
+        return $this->offsetGet('pid');
     }
 
     /**
-     * @return float
+     * @return string
      */
-    public function getBalance(): float
+    public function getUser(): string
     {
-        return $this->offsetGet('balance');
+        return $this->offsetGet('user');
+    }
+
+    /**
+     * @return string
+     */
+    public function getDiscount(): string
+    {
+        return $this->offsetGet('discount');
     }
 
     /**

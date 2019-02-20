@@ -71,9 +71,9 @@ class Topup extends BSONDocument
     /**
      * @return float
      */
-    public function getProfit(): float
+    public function getCharge(): float
     {
-        return $this->offsetGet('profit');
+        return $this->offsetGet('charge');
     }
 
     /**
@@ -90,6 +90,22 @@ class Topup extends BSONDocument
     public function getSteps(): array
     {
         return $this->offsetGet('steps');
+    }
+
+    /**
+     * @return array
+     */
+    public function getReceive(): array
+    {
+        return $this->offsetGet('receive');
+    }
+
+    /**
+     * @return array
+     */
+    public function getCurrency(): array
+    {
+        return $this->offsetGet('currency');
     }
 
     /**

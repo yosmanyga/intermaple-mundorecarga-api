@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0ba593cd88a16f27227354009e889e5",
+    "content-hash": "f1491834bff39480ff3a6260c7b2d5f0",
     "packages": [
         {
             "name": "alymosul/exponent-server-sdk-php",
@@ -1234,16 +1234,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.2.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a"
+                "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
-                "reference": "594bcae1fc0bccd3993d2f0d61a018e26ac2865a",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/5221f49a608808c1e4d436df32884cbc1b821ac0",
+                "reference": "5221f49a608808c1e4d436df32884cbc1b821ac0",
                 "shasum": ""
             },
             "require": {
@@ -1281,7 +1281,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2019-01-12T16:31:37+00:00"
+            "time": "2019-02-16T20:54:15+00:00"
         },
         {
             "name": "ocramius/proxy-manager",
@@ -3164,7 +3164,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:symsonte/framework.git",
+                "url": "https://github.com/symsonte/framework.git",
                 "reference": "5997d7cc177c1ef83f9f02357b1412aa246b5d2c"
             },
             "dist": {
@@ -3277,7 +3277,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:symsonte/js-api.git",
+                "url": "https://github.com/symsonte/js-api.git",
                 "reference": "aba48be48d60be0fff74ff207c0cafee7aaece4f"
             },
             "dist": {
@@ -3307,6 +3307,68 @@
                 "issues": "https://github.com/symsonte/js-api/issues"
             },
             "time": "2019-01-29T23:47:46+00:00"
+        },
+        {
+            "name": "symsonte/security-asserter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symsonte/security-asserter.git",
+                "reference": "00129f6e15830d5dff7e0cf28a0f1a0893e5ebc6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symsonte/security-asserter/zipball/00129f6e15830d5dff7e0cf28a0f1a0893e5ebc6",
+                "reference": "00129f6e15830d5dff7e0cf28a0f1a0893e5ebc6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symsonte\\Security\\": [
+                        "src"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2016-01-12T06:12:57+00:00"
+        },
+        {
+            "name": "symsonte/security-encoder",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symsonte/security-encoder.git",
+                "reference": "f03dd870ee7b6c9a18fa887b9516dafac7d57005"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symsonte/security-encoder/zipball/f03dd870ee7b6c9a18fa887b9516dafac7d57005",
+                "reference": "f03dd870ee7b6c9a18fa887b9516dafac7d57005",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Symsonte\\Security\\": [
+                        "src"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "time": "2016-01-05T00:53:53+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -3364,7 +3426,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/country.git",
+                "url": "https://github.com/yosmy/country.git",
                 "reference": "abf91972097ba8fe8ce9c3df41a1cd471b074c2f"
             },
             "dist": {
@@ -3393,7 +3455,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/ding-recharge.git",
+                "url": "https://github.com/yosmy/ding-recharge.git",
                 "reference": "e6fba92a51bbc11abe2c8e1f63e1b204bbc8efb7"
             },
             "dist": {
@@ -3434,7 +3496,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/error.git",
+                "url": "https://github.com/yosmy/error.git",
                 "reference": "eaa79ed9a0221572464fe4741e4dd305647d7d62"
             },
             "dist": {
@@ -3466,7 +3528,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/log.git",
+                "url": "https://github.com/yosmy/log.git",
                 "reference": "ed0d8f67654a962731c0c5482576779421ce2be5"
             },
             "dist": {
@@ -3505,7 +3567,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/mongo-aggregate.git",
+                "url": "https://github.com/yosmy/mongo-aggregate.git",
                 "reference": "15b29cc4ca0b56b2e611d545b08f2b3ebc27d52c"
             },
             "dist": {
@@ -3538,7 +3600,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/phone-verification.git",
+                "url": "https://github.com/yosmy/phone-verification.git",
                 "reference": "2e37d2c9d5ee11905e6e1a988a5b41842206f77a"
             },
             "dist": {
@@ -3572,7 +3634,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/upgrade.git",
+                "url": "https://github.com/yosmy/upgrade.git",
                 "reference": "37e1498926ce6a232b4e22ca6365da503526c7b7"
             },
             "dist": {
@@ -3600,7 +3662,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/userland-api.git",
+                "url": "https://github.com/yosmy/userland-api.git",
                 "reference": "82b2cb6bb582a736d5393a1f0493a5daebeb025f"
             },
             "dist": {
@@ -3647,7 +3709,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/userland-authentication.git",
+                "url": "https://github.com/yosmy/userland-authentication.git",
                 "reference": "f8cadcf32114ee74921caebe8f7887afe568d33b"
             },
             "dist": {
@@ -3682,11 +3744,56 @@
             "time": "2019-01-04T18:32:54+00:00"
         },
         {
+            "name": "yosmy/userland-password",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/yosmy/userland-password.git",
+                "reference": "c104f6daf287ad48f2dfb9a71307977bccdb7a42"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/yosmy/userland-password/zipball/c104f6daf287ad48f2dfb9a71307977bccdb7a42",
+                "reference": "c104f6daf287ad48f2dfb9a71307977bccdb7a42",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mongodb": "*",
+                "mongodb/mongodb": "~1",
+                "php": ">=7.2",
+                "symsonte/security-asserter": "@dev",
+                "symsonte/security-encoder": "@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Yosmy\\Userland\\Password\\": [
+                        "src"
+                    ]
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Yosmany Garcia",
+                    "email": "yosmanyga@gmail.com"
+                }
+            ],
+            "support": {
+                "source": "https://github.com/yosmy/userland-password/tree/master",
+                "issues": "https://github.com/yosmy/userland-password/issues"
+            },
+            "time": "2019-02-20T14:23:27+00:00"
+        },
+        {
             "name": "yosmy/userland-phone",
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/userland-phone.git",
+                "url": "https://github.com/yosmy/userland-phone.git",
                 "reference": "7c923bc6571c6e2b2c068481ac9df8aa53a25145"
             },
             "dist": {
@@ -3728,7 +3835,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/userland-privilege.git",
+                "url": "https://github.com/yosmy/userland-privilege.git",
                 "reference": "ce0949fad04a6249c4f631dc86ae42644bd77bdb"
             },
             "dist": {
@@ -3770,7 +3877,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/userland-push.git",
+                "url": "https://github.com/yosmy/userland-push.git",
                 "reference": "f60aa7c6c3b101c5ecd0ddbed4d088e39715d22a"
             },
             "dist": {
@@ -3809,7 +3916,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/userland-registration.git",
+                "url": "https://github.com/yosmy/userland-registration.git",
                 "reference": "c7fb82d3626938418e197f9905bd5258b2155d5e"
             },
             "dist": {
@@ -3856,7 +3963,7 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git@github.com:yosmy/userland-uniqueness.git",
+                "url": "https://github.com/yosmy/userland-uniqueness.git",
                 "reference": "dc427691a558887bb6467b47a45eca6cb8941c71"
             },
             "dist": {
@@ -4275,6 +4382,7 @@
         "yosmy/log": 20,
         "yosmy/upgrade": 20,
         "yosmy/userland-api": 20,
+        "yosmy/userland-password": 20,
         "yosmy/ding-recharge": 20,
         "yosmy/mongo-aggregate": 20,
         "yosmy/error": 20

@@ -3,7 +3,6 @@
 namespace Intermaple\Mundorecarga\Reseller\User;
 
 use Intermaple\Mundorecarga\Reseller;
-use MongoDB\BSON\UTCDateTime;
 
 /**
  * @di\service()
