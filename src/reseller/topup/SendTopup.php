@@ -133,7 +133,7 @@ class SendTopup
             throw new \LogicException(null, null, $e);
         }
 
-        $provider = $this->pickProvider->pick($product->getProvider());
+        $provider = $this->pickProvider->pick($product->getProvider(), $reseller);
 
         $discount = $amount * $provider->getDiscount() / 100;
 

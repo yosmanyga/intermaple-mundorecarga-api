@@ -22,16 +22,19 @@ class PickProvider
     }
 
     /**
-     * @param string $id
+     * @param string $pid
+     * @param string $user
      *
      * @return Provider
      */
     public function pick(
-        string $id
+        string $pid,
+        string $user
     ) {
         /** @var Provider $provider */
         $provider = $this->selectCollection->select()->findOne([
-            'pid' => $id
+            'pid' => $pid,
+            'user' => $user,
         ]);
 
         if (!$provider) {

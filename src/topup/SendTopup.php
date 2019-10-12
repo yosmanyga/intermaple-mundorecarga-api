@@ -310,6 +310,7 @@ class SendTopup
     }
 
     /**
+     * @cli\resolution({command: "/send-delayed-topup"})
      * @http\resolution({method: "POST", path: "/send-delayed-topup"})
      * @domain\authorization({roles: ["operator"]})
      *

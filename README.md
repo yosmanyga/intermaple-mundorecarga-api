@@ -2,9 +2,7 @@
 
 ## Dev
 
-docker network create frontend
-
-docker network create backend
+docker network create mundorecarga
 
 # Run
 
@@ -20,9 +18,7 @@ up -d --remove-orphans --force-recreate
 
 # Prod
 
-docker network create frontend
-
-docker network create backend
+docker network create mundorecarga
 
 cd proxy
 docker-compose -f docker/yml -p proxy up -d

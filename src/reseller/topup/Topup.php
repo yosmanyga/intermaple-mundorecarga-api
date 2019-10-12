@@ -93,17 +93,17 @@ class Topup extends BSONDocument
     }
 
     /**
-     * @return array
+     * @return float
      */
-    public function getReceive(): array
+    public function getReceive(): float
     {
         return $this->offsetGet('receive');
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getCurrency(): array
+    public function getCurrency(): string
     {
         return $this->offsetGet('currency');
     }

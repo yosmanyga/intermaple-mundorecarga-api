@@ -39,6 +39,18 @@ class CollectTransactionsAsReseller
         ?int $to,
         ?int $limit
     ) {
+        if (!in_array(
+            $reseller, 
+            [
+                '5c8fc613a2e2d', // Allan
+                '5ce56ecf4d49e', // Osmi
+                '5cead618ba26a', // Esmeiquel
+                '5d25632329732', // Lismary
+            ]
+        )) {
+            return [];
+        }
+
         return $this->collectTransactions->collect(
             $reseller,
             $from,

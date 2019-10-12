@@ -6,8 +6,6 @@ services:
       - ./nginx/default_dev.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
-    networks:
-      - frontend
   php:
     volumes:
       - ./php/php_dev.ini:/usr/local/etc/php/php.ini

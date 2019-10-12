@@ -4,15 +4,10 @@ services:
   nginx:
     image: yosmy/nginx
     container_name: mundorecarga_api_nginx
-    networks:
-      - frontend
-      - backend
     working_dir: /var/www
   php:
     image: yosmy/php
     container_name: mundorecarga_api_php
-    networks:
-      - backend
     working_dir: /var/www
     user: "$UID:$GID"
   mongo:
@@ -20,17 +15,8 @@ services:
     container_name: mundorecarga_api_mongo
     volumes:
       - ../var/db:/data/db
-    networks:
-      - backend
   imaginary:
     image: h2non/imaginary:1
     container_name: mundorecarga_api_imaginary
     user: "$UID:$GID"
-    networks:
-      - backend
 
-networks:
-  frontend:
-    external: true
-  backend:
-    external: true

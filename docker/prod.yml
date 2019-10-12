@@ -4,6 +4,9 @@ services:
   nginx:
     volumes:
       - ./nginx/default_prod.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - proxy
+      - mundorecarga
     environment:
       - VIRTUAL_HOST=api.mundorecarga.com
       - LETSENCRYPT_HOST=api.mundorecarga.com
@@ -13,8 +16,12 @@ services:
     volumes:
       - ./php/php_prod.ini:/usr/local/etc/php/php.ini
       - ../:/var/www/
+    networks:
+      - mundorecarga
     restart: always
   mongo:
+    networks:
+      - mundorecarga
     restart: always
   cron:
     image: yosmy/php
@@ -24,22 +31,17 @@ services:
       - ./php/php_prod.ini:/usr/local/etc/php/php.ini
       - ./cron:/root/cron
     networks:
-      - backend
+      - mundorecarga
     working_dir: /var/www
     entrypoint: /root/cron/entrypoint.sh
     restart: always
   imaginary:
+    networks:
+      - mundorecarga
     restart: always
-#  mongo-express:
-#    image: mongo-express
-#    container_name: mundorecarga_api_mongo_express
-#    depends_on:
-#      - mongo
-#    networks:
-#      - frontend
-#      - backend
-#    environment:
-#      - ME_CONFIG_OPTIONS_READONLY=true
-#      - ME_CONFIG_SITE_BASEURL=/db/
-#    expose:
-#      - 8081
+
+networks:
+  proxy:
+    external: true
+  mundorecarga:
+    external: true
